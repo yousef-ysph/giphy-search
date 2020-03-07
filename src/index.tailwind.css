@@ -10,3 +10,26 @@ body{
     font-family: 'Roboto', sans-serif;
 
 }
+
+.x-container{
+    margin: 0% 3%;
+}
+
+
+@media (min-width: 600px){
+    .x-container{
+        margin: 0% 5%;
+    }
+}
+
+@media (min-width: 1024px){
+    .x-container{
+        margin: 0% 10%;
+    }
+}
+
+@media (min-width: 1280px){
+    .x-container{
+        margin: 0% 15%;
+    }
+  }

@@ -6,7 +6,9 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      <Search/>
+      <div className="x-container">
+        <Search/>
+      </div>
     </div>
   );
 }
