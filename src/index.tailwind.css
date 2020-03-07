@@ -32,4 +32,27 @@ body{
     .x-container{
         margin: 0% 15%;
     }
+}
+
+.pagination {
+    display: inline-block;
+}
+.pagination button {
+    color: black;
+    background: white;
+    border: 1px solid #ddd;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
   }
+.pagination button.active {
+    background-color: indigo;
+    color: white;
+}
+.pagination button.active:hover {
+    background-color: rgb(107, 3, 182);
+    color: white;
+}
+.pagination button:hover {
+    background-color: #ddd;
+}

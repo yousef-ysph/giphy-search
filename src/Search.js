@@ -1,5 +1,6 @@
 import React from 'react';
 import Gif from './Gif';
+import Pagination from './Pagination';
 const axios = require('axios');
 
 class Search extends React.Component {
@@ -7,6 +8,11 @@ class Search extends React.Component {
     apiKey = '';
 
     state = {
+        pagination:{
+            offset:0,
+            total_count:0,
+            count:20
+        },
         GIFs:[],
         searchQuery:'great',
         page:0,
@@ -18,16 +24,34 @@ class Search extends React.Component {
 
     getUrl(){
         let url='https://api.giphy.com/v1/gifs/search?api_key='+this.apiKey+'&q='+this.state.searchQuery+
-        '&limit=25&offset='+this.state.page+'&rating=R&lang=en';
-        console.log(url)
+        '&limit='+this.state.pagination.count+'&offset='+this.state.pagination.offset+'&rating=R&lang=en';
         return url;
     }
     
+    changePage = (page)=>{
+        let pagination = {...this.state.pagination,offset:page*this.state.pagination.count}
+        this.setState({pagination:pagination});
+    }
+    
+    componentDidUpdate(prevProps,prevState) {
+        // Typical usage (don't forget to compare props):
+        if (this.state.pagination.offset !== prevState.pagination.offset) {
+          this.getGIFs()
+        }
+    }
+
+    search= ()=>{
+        console.log("searching")
+        let pagination = {...this.state.pagination,offset:0}
+        this.setState({pagination:pagination});
+        this.getGIFs()
+    }
+
     getGIFs = ()=>{
 
         axios.get(this.getUrl()).then((response)=>{
-            console.log(response);
             this.setState({GIFs:response.data.data});
+            this.setState({pagination:response.data.pagination})
         }).catch(function (error) {
             // handle error
             console.log(error);
@@ -45,7 +69,7 @@ class Search extends React.Component {
 
     handleKeyPress = (event) => {
         if(event.key === 'Enter'){
-          console.log('enter press here! ')
+          this.search()
         }
     }
 
@@ -58,12 +82,15 @@ class Search extends React.Component {
         <div>
             <div className="w-full flex">
                 <input onKeyPress={this.handleKeyPress} className='w-3/4 border-1 bg-white p-3' placeholder="Search for gifs" value={this.searchQuery} onChange={this.handleSearchQueryChange}/>
-                <button className='w-1/4 border-0 bg-black p-3 text-white'  onClick={this.getGIFs}>Search</button>
+                <button className='w-1/4 border-0 bg-black p-3 text-white'  onClick={this.search}>Search</button>
             </div>
+            <br/>
+            <div >{this.state.pagination.count} out of {this.state.pagination.total_count} search results</div>
             <br/>
             <div className="flex flex-wrap">
                 {this.renderPictures()}
             </div>
+            <Pagination pagination={this.state.pagination} changePage={this.changePage} />
         </div>
       );
     }
