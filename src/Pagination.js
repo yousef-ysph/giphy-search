@@ -22,21 +22,18 @@ class Pagination extends React.Component{
     }
 
     changeNumber = (number)=>{
-        console.log(number)
         this.setState({pageNumber:number})
         this.props.changePage(number);
     }
 
     less = ()=>{
         if(this.state.pageNumber>0){
-            console.log("less")
             this.changeNumber(this.state.pageNumber-1)
         }
     }
     
     more = ()=>{
         if(this.state.pageNumber<this.props.pagination.total_count/this.props.pagination.count){
-            console.log("more")
             this.changeNumber(this.state.pageNumber+1)
         }
     }
