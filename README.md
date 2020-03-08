@@ -1,5 +1,15 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Live view](https://yousef-aldawoud.github.io/giphy-search/).
 
+
+To make the web app work you need to add your gihpy API key in the `src/Search.js` file
+
+
+```javascript
+class Search extends React.Component {
+
+    apiKey = 'YOUR_API_KEY';
+}
+```
 ## Available Scripts
 
 In the project directory, you can run:
