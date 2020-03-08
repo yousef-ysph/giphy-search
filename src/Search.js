@@ -25,7 +25,6 @@ class Search extends React.Component {
     getUrl(){
         let url='https://api.giphy.com/v1/gifs/search?api_key='+this.apiKey+'&q='+this.state.searchQuery+
         '&limit='+this.state.pagination.count+'&offset='+this.state.pagination.offset+'&rating=g&lang=en';
-        console.log(url);
         return url;
     }
     
@@ -42,7 +41,6 @@ class Search extends React.Component {
     }
 
     search= ()=>{
-        console.log("searching")
         let pagination = {...this.state.pagination,offset:0}
         this.setState({pagination:pagination});
         this.getGIFs()
@@ -55,7 +53,6 @@ class Search extends React.Component {
             this.setState({pagination:response.data.pagination})
         }).catch(function (error) {
             // handle error
-            console.log(error);
         })
         .finally(function () {
             // always executed
@@ -75,7 +72,7 @@ class Search extends React.Component {
     }
 
     componentDidMount(){
-        this.getGIFs()
+        
     }
 
     render(){
@@ -86,7 +83,7 @@ class Search extends React.Component {
                 <button className='w-1/4 border-0 bg-black p-3 text-white'  onClick={this.search}>Search</button>
             </div>
             <br/>
-            <div >{this.state.pagination.count} out of {this.state.pagination.total_count} search results</div>
+            <div >{this.state.pagination.total_count>this.state.pagination.count? this.state.pagination.count : this.state.pagination.total_count} out of {this.state.pagination.total_count} search results</div>
             <br/>
             <div className="flex flex-wrap">
                 {this.renderPictures()}
