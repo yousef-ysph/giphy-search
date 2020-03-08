@@ -24,7 +24,8 @@ class Search extends React.Component {
 
     getUrl(){
         let url='https://api.giphy.com/v1/gifs/search?api_key='+this.apiKey+'&q='+this.state.searchQuery+
-        '&limit='+this.state.pagination.count+'&offset='+this.state.pagination.offset+'&rating=R&lang=en';
+        '&limit='+this.state.pagination.count+'&offset='+this.state.pagination.offset+'&rating=g&lang=en';
+        console.log(url);
         return url;
     }
     
@@ -63,7 +64,7 @@ class Search extends React.Component {
 
     renderPictures(){
         return this.state.GIFs.map((gif)=>{
-         return  <Gif url={gif.images.looping.mp4} title={gif.title} key={gif.id} />
+         return  <Gif gif={gif} url={gif.images.looping.mp4} title={gif.title} key={gif.id} />
         })
     }
 
