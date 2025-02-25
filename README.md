@@ -1,4 +1,4 @@
-This project was bootstrapped with [Live view](https://yousef-aldawoud.github.io/giphy-search/).
+This project was bootstrapped with [Live view](https://yousef-ysph.github.io/giphy-search/).
 
 
 To make the web app work you need to add your gihpy API key in the `src/Search.js` file
